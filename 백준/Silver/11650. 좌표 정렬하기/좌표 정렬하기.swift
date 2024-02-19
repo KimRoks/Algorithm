@@ -7,17 +7,14 @@ for _ in 1...n {
     arr.append(xy)
 }
 
-
-var result = arr.sorted(by: {
+arr.sort {
     if $0[0] != $1[0] {
         return $0[0] < $1[0]
-    } else if $1[1] == $1[1] {
+    } else  {
         return $0[1] < $1[1]
     }
-    return true
-})
+}
 
-
-for i in 0...result.count - 1 {
-    print("\(result[i][0]) \(result[i][1])")
+for i in 0...arr.count - 1 {
+    print("\(arr[i][0]) \(arr[i][1])")
 }
