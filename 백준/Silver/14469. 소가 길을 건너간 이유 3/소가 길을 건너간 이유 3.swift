@@ -7,9 +7,8 @@ for _ in 1...n {
     arr.append(xy)
 }
 arr.sort(by: { $0[0] < $1[0] })
-result = arr[0].first! + arr[0].last!
 
-for i in 1..<arr.count {
+for i in 0..<arr.count {
     let (x,y) = (arr[i][0],arr[i][1])
     
     if result < x {
