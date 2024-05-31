@@ -11,8 +11,8 @@ for _ in 0..<k {
     arrays.append(input)
 }
 
-var left = 1
-var right = arrays.max()!
+var left = 0
+var right = Int.max - 1
 
 while left <= right {
     let mid = (left + right) / 2
