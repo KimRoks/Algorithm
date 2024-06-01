@@ -6,15 +6,22 @@ for _ in  0..<testcase{
     let Aarray = readLine()!.split(separator: " ").map { Int($0)! }.sorted()
     let Barray = readLine()!.split(separator: " ").map{ Int($0)! }.sorted()
     
-    for i in Aarray {
-        for j in Barray {
-            if i > j {
-                result += 1
+    for a in Aarray {
+        var left = 0
+        var right = Barray.count - 1
+        
+        while left <= right {
+            let mid = (left + right) / 2
+            
+            if Barray[mid] < a {
+                left = mid + 1
             } else {
-                break
+                right = mid - 1
             }
+            
         }
+        result += left
     }
+print(result)
     
-    print(result)
 }
