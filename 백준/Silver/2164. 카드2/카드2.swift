@@ -19,7 +19,7 @@ struct Q {
             output = input.reversed()
             input = []
         }
-        return output.popLast()
+        return output.removeLast()
     }
 }
 
