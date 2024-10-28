@@ -1,6 +1,4 @@
-import Foundation
-
-func getMinRotation(_ numbers: [Int]) -> Int {
+func getMinClockNumber(_ numbers: [Int]) -> Int {
     let rotations = [
         numbers[0] * 1000 + numbers[1] * 100 + numbers[2] * 10 + numbers[3],
         numbers[1] * 1000 + numbers[2] * 100 + numbers[3] * 10 + numbers[0],
@@ -16,14 +14,14 @@ for i in 1111...9999 {
     if temp.contains(0) {
         continue
     }
-    let minRotation = getMinRotation(temp)
-    clockNumbers.insert(minRotation)
+    let clockNumber = getMinClockNumber(temp)
+    clockNumbers.insert(clockNumber)
 }
 
 let sortedClockNumbers = Array(clockNumbers).sorted()
 
 var input = readLine()!.split(separator: " ").map { Int($0)! }
-let myMinClockNumber = getMinRotation(input)
+let myMinClockNumber = getMinClockNumber(input)
 
 if let position = sortedClockNumbers.firstIndex(of: myMinClockNumber) {
     print(position + 1)
