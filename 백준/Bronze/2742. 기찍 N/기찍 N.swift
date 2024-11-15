@@ -1,6 +1,5 @@
-let input = Int(readLine()!)!
+let n = Int(readLine()!)!
 
-for i in (1...input).reversed() {
+for i in (1...n).reversed(){
     print(i)
 }
-
