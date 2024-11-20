@@ -1,33 +1,5 @@
 import Foundation
 
-// 큐 구조체 정의
-struct Queue<T> {
-    private var input = [T]()
-    private var output = [T]()
-    
-    var size: Int { input.count + output.count }
-    var isEmpty: Bool { input.isEmpty && output.isEmpty }
-    var front: T? {
-        if output.isEmpty {
-            return input.first
-        }
-        return output.last
-    }
-    
-    mutating func enqueue(_ newElement: T) {
-        input.append(newElement)
-    }
-    
-    mutating func dequeue() -> T? {
-        if output.isEmpty {
-            output = input.reversed()
-            input.removeAll()
-        }
-        return output.popLast()
-    }
-}
-
-// 입력 처리
 let nm = readLine()!.split(separator: " ").map { Int($0)! }
 let (n, m) = (nm[0], nm[1])
 
@@ -35,6 +7,7 @@ var graph = [[Int]]()
 let dx = [0, 0, -1, 1]
 let dy = [-1, 1, 0, 0]
 
+// 입력 받기
 for _ in 0..<n {
     graph.append(readLine()!.split(separator: " ").map { Int($0)! })
 }
@@ -42,29 +15,32 @@ for _ in 0..<n {
 // BFS 함수
 func bfs(startGraph: [[Int]]) -> [[Int]] {
     var tempGraph = startGraph
-    var queue = Queue<(Int, Int)>()
+    var queue = [(Int, Int)]()
+    var visited = Array(repeating: Array(repeating: false, count: m), count: n)
     
     // 바이러스 위치를 큐에 추가
     for i in 0..<n {
         for j in 0..<m {
             if tempGraph[i][j] == 2 {
-                queue.enqueue((i, j))
+                queue.append((i, j))
+                visited[i][j] = true
             }
         }
     }
     
     // BFS 시작
     while !queue.isEmpty {
-        let (currentN, currentM) = queue.dequeue()!
+        let (currentN, currentM) = queue.removeFirst()
         
         for i in 0..<4 {
             let nextN = currentN + dy[i]
             let nextM = currentM + dx[i]
             
             if nextN >= 0, nextN < n, nextM >= 0, nextM < m {
-                if tempGraph[nextN][nextM] == 0 {
+                if !visited[nextN][nextM] && tempGraph[nextN][nextM] == 0 {
                     tempGraph[nextN][nextM] = 2
-                    queue.enqueue((nextN, nextM))
+                    visited[nextN][nextM] = true
+                    queue.append((nextN, nextM))
                 }
             }
         }
