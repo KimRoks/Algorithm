@@ -1,24 +1,14 @@
 let n = Int(readLine()!)!
+let distance = readLine()!.split(separator: " ").map { Int($0)! }
+let price = readLine()!.split(separator: " ").map { Int($0)! }
+var answer = 0
+var minPrice = price[0]
 
-let length = readLine()!.split(separator: " ").map{Int($0)!}
-
-let oilPice = readLine()!.split(separator: " ").map{Int($0)!}
-
-var totalLength = length.reduce(0, +)
-
-var result = 0
-
-// 처음엔 가격에 상관없이 넣어야함
-result += oilPice[0] * length[0]
-totalLength -= length[0]
-
-var minimumOilPrice = oilPice[0]
-// 마지막 도착지에선 주유 안해도 됨
-for i in 0..<oilPice.count - 1 {
-    //가장 싼 가격을 구해줌
-    minimumOilPrice = min(minimumOilPrice, oilPice[i])
+for i in 0..<n - 1 {
+    if minPrice > price[i] {
+        minPrice = price[i]
+    }
+    answer += minPrice * distance[i]
 }
 
-result += totalLength * minimumOilPrice
-
-print(result)
+print(answer)
