@@ -1,5 +1,3 @@
-import Foundation
-
 let nmk = readLine()!.split(separator: " ").map { Int($0)! }
 let (n, m, k) = (nmk[0], nmk[1], nmk[2])
 
@@ -16,40 +14,16 @@ for _ in 0..<k {
 
 var resultArr = [Int]()
 
-// 개선된 Queue 구조체
-struct Queue<T> {
-    private var input = [T]()
-    private var output = [T]()
-    
-    var isEmpty: Bool { input.isEmpty && output.isEmpty }
-    
-    mutating func enqueue(_ newElement: T) {
-        input.append(newElement)
-    }
-    
-    mutating func dequeue() -> T {
-        if output.isEmpty {
-            output = input.reversed()
-            input = []
-        }
-        return output.popLast()!
-    }
-}
-
 func bfs(startM: Int, startN: Int) {
-    var queue = Queue<[Int]>()
-    queue.enqueue([startM, startN])
+    var queue = [[startM, startN]]
     var count = 0
     
     while !queue.isEmpty {
-        let current = queue.dequeue()
+        let current = queue.removeFirst()
         let currentM = current[0]
         let currentN = current[1]
         
-        if isVisited[currentN][currentM] == 0 {
-            continue
-        }
-        
+        if isVisited[currentN][currentM] == 0 { continue }
         isVisited[currentN][currentM] = 0
         count += 1
         
@@ -59,7 +33,7 @@ func bfs(startM: Int, startN: Int) {
             
             if nextM < m, nextM >= 0, nextN < n, nextN >= 0 {
                 if isVisited[nextN][nextM] == 1 {
-                    queue.enqueue([nextM, nextN])
+                    queue.append([nextM, nextN])
                 }
             }
         }
