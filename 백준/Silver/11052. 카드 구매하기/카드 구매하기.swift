@@ -1,5 +1,5 @@
 let n = Int(readLine()!)!
-let input = readLine()!.split(separator: " ").map { Int(String($0))! }
+let input = readLine()!.split(separator: " ").map {Int($0)!}
 var dp = [Int](repeating: 0, count: n+1)
 
 for i in 1..<n+1 {
